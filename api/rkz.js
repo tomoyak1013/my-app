@@ -1,21 +1,24 @@
 
 // api/rkz.js
 // 実際の RKZ SDK 名・メソッドに合わせて調整してください。
-import RKZ from 'baasatrakuza-admin';
+import RKZ from 'baasatrakuza';
 
-const { APP_tenantBaseUrl, APP_tenantId, APP_token } = process.env;
+const { App_AuthUsername, App_AuthPassword, SDK_API_KEY } = process.env;
 let initialized = false;
 
 export async function initSdk() {
   if (initialized) return;
-  if (!APP_tenantBaseUrl || !APP_tenantId || !APP_token) {
-    throw new Error('SDK credentials missing (APP_tenantBaseUrl/APP_tenantId/APP_token)');
+  if (!App_AuthUsername || !App_AuthPassword || !SDK_API_KEY) {
+    throw new Error('SDK credentials missing (App_AuthUsername/App_AuthPassword/SDK_API_KEY)');
   }
-  await RKZ.init({
-    tenantBaseUrl: APP_tenantBaseUrl,
-    tenantId: APP_tenantId,
-    token: APP_token
-  });
+  RKZ.config.appAuthUsername = App_AuthUsername;
+  RKZ.config.appAuthPassword = App_AuthPassword;
+  try {
+    await RKZ.init(SDK_API_KEY);
+    console.log('SDKの初期化に成功しました！');
+  } catch (error) {
+    console.error('SDKの初期化に失敗しました。', error)
+  }
   initialized = true;
 }
 

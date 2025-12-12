@@ -1,11 +1,11 @@
-
 {
   "name": "vercel-rkz-proxy-template",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "dependencies": {
-    "jsonwebtoken": "^9.0.2",
-    "rkz-sdk": "^1.0.0"
+    "baasatrakuza": "^1.3.0",
+    "baasatrakuza-admin": "^1.0.0",
+    "jsonwebtoken": "^9.0.2"
   }
 }
